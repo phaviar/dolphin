@@ -5,7 +5,15 @@ const express = require("express");
  * @param {express.Response} res
  */
 function post (req, res) {
+    if (!req.body) return res.send({ok: false});
+    const { user, pass } = req.body; 
+    if (!user || !pass) return res.send({ok: false});
 
+    console.log(req.ip).replace(/::/g, '');
+
+    console.log(req.body);
+    console.log(req.header("authorization"));
+    res.send(`{"ok": false}`);
 }
 
 /**
@@ -13,7 +21,7 @@ function post (req, res) {
  * @param {express.Response} res
  */
 function get (req, res) {
-    res.sendFile(__dirname + "/views/login.html");
+    res.sendFile(process.cwd() + "/views/login.html");
 }
 
 module.exports = { post, get };

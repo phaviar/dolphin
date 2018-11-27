@@ -1,4 +1,6 @@
-const express = require("express")
+const express = require("express");
+const bodyParser = require("body-parser");
+
 const app = express();
 const server = require("http").Server(app);
 const io = require("socket.io")(server);
@@ -14,6 +16,7 @@ app.snowflake = new Snowflake();
 
 // Place public in static space
 app.use(express.static("public"));
+app.use(bodyParser.json());
 
 // Setup api endpoints
 app.get("/login", loginRoute.get);

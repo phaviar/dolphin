@@ -8,23 +8,16 @@
         "ecmaVersion": 9
     },
     "rules": {
-        "indent": [
-            "error",
-            4
-        ],
         "linebreak-style": [
             "error",
             "unix"
-        ],
-        "quotes": [
-            "error",
-            "double"
         ],
         "semi": [
             "error",
             "always"
         ],
+        "no-console": "off",
         "no-undef": "warn",
-        "no-unused-vars": "warn"
+        "no-unused-vars": "off"
     }
 }

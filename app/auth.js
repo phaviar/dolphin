@@ -1,5 +1,12 @@
+const bcrypt = require("bcrypt");
+
+
 class Auth {
-    static createHash(pass) {
+    static async createHash(pass) {
+       
+    }
+
+    static async comparePass(pass) {
 
     }
 
@@ -11,3 +18,5 @@ class Auth {
 
     }
 }
+
+module.exports = Auth;

@@ -77,3 +77,6 @@ typings/
 
 #DynamoDB Local files 
 .dynamodb/ 
+
+# Rethinkdb files
+rethinkdb_data
