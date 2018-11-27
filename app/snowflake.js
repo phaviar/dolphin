@@ -15,7 +15,6 @@ class Snowflake {
         if (this.sequenceId > 4095) this.sequenceId = 0;
 
         const bin = timestamp + worker + process + sequence;
-        console.log(bin.length);
 
         return parseInt(bin, 2) + "";
     }
@@ -27,8 +26,6 @@ class Snowflake {
         let worker = bin.substr(42, 5);
         let process = bin.substr(47, 5);
         let sequence = bin.substr(52, 12);
-
-        console.log(bin);
 
         timestamp = new Date(parseInt(timestamp, 2) + chepoch);
         worker = parseInt(worker, 2);
