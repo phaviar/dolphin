@@ -13,7 +13,7 @@ function post (req, res) {
  * @param {express.Response} res
  */
 function get (req, res) {
-    res.sendFile(__dirname)
+    res.sendFile(__dirname + "/views/login.html");
 }
 
 module.exports = { post, get };
