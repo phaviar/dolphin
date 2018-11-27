@@ -12,17 +12,15 @@ class Snowflake {
         let worker = decToBin(this.workerId, 5);
         let process = decToBin(this.processId, 5);
         let sequence = decToBin(this.sequenceId++, 12);
-        console.log(timestamp, worker, process, sequence);
+
         if (this.sequenceId > 4095) this.sequenceId = 0;
 
         const bin = timestamp + worker + process + sequence;
-        console.log(bin);
         return parseInt(bin, 2) + "";
     }
 
     destruct(snowflake) {
         let bin = decToBin(parseInt(snowflake), 64);
-        console.log(bin);
 
         let timestamp = bin.substr(0, 42);
         let worker = bin.substr(42, 5);
