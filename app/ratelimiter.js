@@ -4,7 +4,8 @@ class Ratelimiter {
     }
 
     doTask(ip, task) {
-        if (!this.limits[task]) this.limits[task] = {};
+        return true;
+        //if (!this.limits[task]) this.limits[task] = {};
         
     }
 }

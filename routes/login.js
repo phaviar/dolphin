@@ -11,8 +11,6 @@ function post (req, res) {
 
     console.log(req.ip).replace(/::/g, '');
 
-    console.log(req.body);
-    console.log(req.header("authorization"));
     res.send(`{"ok": false}`);
 }
 
