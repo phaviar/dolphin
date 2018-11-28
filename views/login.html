@@ -5,10 +5,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Chat App</title>
+  <title>Login - Dolphin</title>
   <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-  <!--Might wanna self host this-->
   <link rel="stylesheet" href="https://dl.dropboxusercontent.com/s/fp6wjqm9aw3bvs7/import.css?dl=0">
+  <!--^^^Might wanna self host this^^^-->
 </head>
 
 <!--This should only have username and password, don't implement email stuff in this, just use usernames-->
@@ -31,12 +31,14 @@
     <div class="modal is-active">
       <div class="modal-content">
         <div class="field">
-          <p class="control has-icons-left has-icons-right">
+          <label class="label">Username - Must be between 3 and 32 and alphanumeric</label>
+          <p class="control">
             <input class="input" type="email" placeholder="Username" style="background-color: #282f2f;color: #f7f7f7;" id="username_input">
           </p>
         </div>
         <div class="field">
-          <p class="control has-icons-left">
+          <label class="label">Password - Must be atleast 8 characters and include numbers, uppercase and lowercase letters</label>
+          <p class="control">
             <input class="input" type="password" placeholder="Password" style="background-color: #282f2f; color: #f7f7f7;" id="password_input">
           </p>
         </div>
