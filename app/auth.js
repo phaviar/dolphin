@@ -1,4 +1,5 @@
 const bcrypt = require("bcrypt");
+
 const chepoch = 1543303383712;
 
 class Auth {
@@ -7,8 +8,8 @@ class Auth {
        return await bcrypt.hash(pass, salt);
     }
 
-    static async comparePass(pass) {
-
+    static comparePass(pass, encrypted) {
+        return bcrypt.compare(pass, encrypted);
     }
 
     static createToken(id) {

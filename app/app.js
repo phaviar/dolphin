@@ -5,6 +5,7 @@ const app = express();
 const server = require("http").Server(app);
 const io = require("socket.io")(server);
 const Snowflake = require("./snowflake.js");
+const RateLimiter = require("./ratelimiter.js");
 
 const port = 80;
 
@@ -13,6 +14,7 @@ const loginRoute = require("../routes/login.js");
 const chatRoute = require("../routes/chat.js");
 
 app.snowflake = new Snowflake();
+app.limiter = new RateLimiter(3, 5);
 
 // Place public in static space
 app.use(express.static("public"));
