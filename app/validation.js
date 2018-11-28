@@ -23,7 +23,7 @@ class Validation {
         if (!data.id || !data.random || !data.timestamp) return false;
         return Validation.id(data.id) &&
                 data.random.length === 10 &&
-                (data.timestamp + auth.chepoch + tokenDecay) < Date.now(); 
+                new Date(data.timestamp).toString() === "Invalid Date";
     }
 }
 

@@ -7,12 +7,13 @@ const io = require("socket.io")(server);
 const Snowflake = require("./snowflake.js");
 const RateLimiter = require("./ratelimiter.js");
 const Database = require("./database");
+const socketHandler = require("./socket.js");
 
 const port = 80;
 
-// Routes
-const loginRoute = require("../routes/login.js");
-const chatRoute = require("../routes/chat.js");
+// API
+const apiAuth = require("../api/auth.js");
+const apiNewUser = require("../api/new_user.js");
 
 app.snowflake = new Snowflake();
 app.limiter = new RateLimiter(3, 5);
@@ -22,17 +23,23 @@ app.database = new Database();
 app.use(express.static("public"));
 app.use(bodyParser.json());
 
+// Setup html serving
+app.get("/signup", (req, res) => {
+    res.sendFile(__dirname + "/views/signup.html");
+});
+app.get("/login", (req, res) => {
+    res.sendFile(__dirname + "/views/login.html");
+});
+app.get("/chat", (req, res) => {
+    res.sendFile(__dirname + "/views/chat.html");
+});
+
 // Setup api endpoints
-app.get("/login", loginRoute.get);
-app.post("/login", loginRoute.post);
-app.get("/chat", chatRoute.get);
+app.post("/api/new_user", apiNewUser);
+app.post("/api/auth", apiAuth);
 
 // Create socket connection only for /chat endpoint
-io.of("/chat")
-    .on("connection",
-        socket => {
-
-        });
+io.of("/chat").on("connection", socketHandler);
 
 // Start the server
 server.listen(port, () =>
