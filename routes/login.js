@@ -8,6 +8,8 @@ const auth = require("../app/auth.js");
 function post (req, res) {
     if (req.body.user && req.body.pass) {
         // Password authentication
+        let { user, pass } = req.body;
+        pass = Buffer.from(pass, "base64").toString();
         
     } else if (req.header("authorization")) {
         // Token authentication

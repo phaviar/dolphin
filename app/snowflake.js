@@ -1,4 +1,4 @@
-const chepoch = 1543303383712;
+const auth = require("./auth.js");
 
 class Snowflake {
     constructor() {
@@ -8,7 +8,7 @@ class Snowflake {
     }
 
     nextId() {
-        let timestamp = decToBin(Date.now() - chepoch, 42);
+        let timestamp = decToBin(Date.now() - auth.chepoch, 42);
         let worker = decToBin(this.workerId, 5);
         let process = decToBin(this.processId, 5);
         let sequence = decToBin(this.sequenceId++, 12);
@@ -27,7 +27,7 @@ class Snowflake {
         let process = bin.substr(47, 5);
         let sequence = bin.substr(52, 12);
 
-        timestamp = new Date(parseInt(timestamp, 2) + chepoch);
+        timestamp = new Date(parseInt(timestamp, 2) + auth.chepoch);
         worker = parseInt(worker, 2);
         process = parseInt(process, 2);
         sequence = parseInt(sequence, 2);

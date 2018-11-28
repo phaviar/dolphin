@@ -1,8 +1,10 @@
 const bcrypt = require("bcrypt");
 
-const chepoch = 1543303383712;
-
 class Auth {
+    static get chepoch() {
+        return 1543303383712;
+    }
+
     static async createHash(pass) {
        const salt = await bcrypt.genSalt();
        return await bcrypt.hash(pass, salt);
@@ -15,7 +17,7 @@ class Auth {
     static createToken(id) {
         // id . random . timestamp
         const random = new Array(10).fill(0).map(_ => randomChar()).join``;
-        const timestamp = Date.now() - chepoch;
+        const timestamp = Date.now() - Auth.chepoch;
         const token = `${id}.${random}.${timestamp}`;
       
         return Buffer.from(token).toString("base64");
@@ -25,7 +27,7 @@ class Auth {
         const data = Buffer.from(token, "base64").toString();
        
         let [ id, random, timestamp ] = data.split(".");
-        timestamp = new Date(parseInt(timestamp) + chepoch);
+        timestamp = new Date(parseInt(timestamp) + Auth.chepoch);
 
         return { id, random, timestamp };
     }
