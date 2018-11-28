@@ -12,6 +12,7 @@
     "bcrypt": "^3.0.2",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
+    "rethinkdbdash": "^2.3.31",
     "socket.io": "^2.1.1"
   }
 }

@@ -4,7 +4,7 @@ class Model {
     }
 
     validateId(id) {
-        
+
     }
 }
 
@@ -14,6 +14,8 @@ class UserModel extends Model {
         this.id = data.id;
         this.username = data.username;
         this.password = data.password;
+        this.token = data.token;
+        this.validate();
     }
 
     validate() {
