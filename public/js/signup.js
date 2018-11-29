@@ -44,11 +44,11 @@ function sendForm (data) {
 function validateInput (elem, test) {
     if (test) {
         elem.classList.remove("is-danger");
-        elem.classList.add("is_success");
+        elem.classList.add("is-success");
         return true;
     }
     elem.classList.remove("is-success");
-    elem.classList.add("is_danger");
+    elem.classList.add("is-danger");
     return false;
 }
 
