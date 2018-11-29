@@ -2,15 +2,16 @@ const express = require("express");
 const bodyParser = require("body-parser");
 
 const app = express();
-module.exports = app;
+
 
 const server = require("http").Server(app);
 const io = require("socket.io")(server);
+app.io = io;
+module.exports = app;
 const Snowflake = require("./snowflake.js");
 const RateLimiter = require("./ratelimiter.js");
 const Database = require("./database");
 const socketHandler = require("./socket.js");
-
 const port = 80;
 
 // API
@@ -20,7 +21,6 @@ const apiNewUser = require("../api/new_user.js");
 app.snowflake = new Snowflake();
 app.limiter = new RateLimiter(3, 5);
 app.database = new Database();
-
 // Place public in static space
 app.use(express.static("public"));
 app.use(bodyParser.json());

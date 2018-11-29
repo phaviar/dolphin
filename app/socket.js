@@ -15,11 +15,10 @@ function connection (socket) {
         const user = await app.database.getUser(tokenData.id);
         if (!user) return;
         if (user.token != token) return;
-        
+
         const id = app.snowflake.nextId();
         const timestamp = Date.now();
         const author = user.id;
-        
         app.io.sockets.emit("message_create", {
             id,
             content,
@@ -27,16 +26,6 @@ function connection (socket) {
             timestamp
         });
     });
-
-    socket.on("message_edit", async data => {
-
-    });
-
-    socket.on("message_delete", async data => {
-
-    });
-
-    // Split into seperate files eventually
 }
 
 module.exports = connection;
