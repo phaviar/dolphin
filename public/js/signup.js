@@ -17,7 +17,7 @@ function onFormSubmit () {
         pass = password.value,
         re_pass = re_password.value;
 
-    if (!validateInput(username, usernameRegex.test(user))) 
+    if (!validateInput(username, usernameRegex.test(user)))
         return;
     if (!validateInput(password, passwordRegex.test(pass)))
         return;
