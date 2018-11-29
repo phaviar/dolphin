@@ -12,7 +12,7 @@
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 </head>
 
-<body>
+<body id="chatbody">
     <div id="app">
         <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
             <div id=" navbarBasicExample" class="navbar-menu">
@@ -93,7 +93,16 @@
             </article>
             <hr>
         </div>
-        <textarea name="name" rows="8" cols="80"></textarea>
+        <section class="section" style="  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  text-align: center;">
+            <div class="container">
+                <textarea class="textarea has-fixed-size" id="input_message" name="name" rows="1" cols="80"></textarea>
+            </div>
+        </section>
     </div>
     <script src="/js/chat.js"></script>
 </body>
