@@ -7,7 +7,7 @@ class Auth {
 
     static async createHash(pass) {
        const salt = await bcrypt.genSalt();
-       return await bcrypt.hash(pass, salt);
+       return bcrypt.hash(pass, salt);
     }
 
     static comparePass(pass, encrypted) {

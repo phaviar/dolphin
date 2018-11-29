@@ -15,17 +15,17 @@ async function passwordAuth (req, res) {
 
     let { user, pass } = req.body;
     pass = Buffer.from(pass, "base64").toString();
-
+    console.log(pass);
     if (!validate.username(user) || !validate.password(pass))
         return;
-    console.log("invalid");
+
     const userData = await req.app.database.getUserByName(user);
-    console.log(userData);
+
     if (!userData) return;
-    console.log("no user");
+
     if (!(await auth.comparePass(pass, userData.password)))
         return;
-    console.log('incorrect');
+
     res.send({ ok: true, token: userData.token });
     return true;
 }

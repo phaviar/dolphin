@@ -16,7 +16,7 @@ async function newUser (req, res) {
 
     let { user, pass } = req.body;
     pass = Buffer.from(pass, "base64").toString();
-
+    
     if (!validate.username(user) || !validate.password(pass))
         return;
 

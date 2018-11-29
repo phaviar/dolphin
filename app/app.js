@@ -2,6 +2,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 
 const app = express();
+module.exports = app;
+
 const server = require("http").Server(app);
 const io = require("socket.io")(server);
 const Snowflake = require("./snowflake.js");
