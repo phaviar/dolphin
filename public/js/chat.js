@@ -9,8 +9,10 @@ var dropdown = document.querySelector('.dropdown');
 var global = document.querySelector('html');
 var deletemsg = document.getElementById('deletemsg');
 var profile = document.getElementById('profile');
+var chatbody = document.getElementById('chatbody');
 var profile_modal = document.getElementById('profile_modal');
 var profile_modal_close = document.getElementById('profile_modal_close');
+var input_message = document.getElementById('input_message');
 
 dropdown.addEventListener('click', (event) => {
     event.stopPropagation();
@@ -30,4 +32,15 @@ profile.addEventListener('click', (event) => {
 });
 profile_modal_close.addEventListener('click', (event) => {
     profile_modal.classList.remove('is-active');
+});
+input_message.addEventListener('keypress', (event) => {
+    if (event.keyCode == 13 && !event.shiftKey) { // Check if the user doesn't mean new line and send.
+        input_message.value = '';
+        input_message.blur(); // Un focus
+    }
+});
+global.addEventListener('keypress', (event) => {
+    if (event.target.id === chatbody.id) {
+        input_message.focus(); // This is a really nice thing to have.
+    }
 });
