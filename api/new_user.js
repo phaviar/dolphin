@@ -3,8 +3,8 @@ const auth = require("../app/auth.js");
 const validate = require("../app/validation.js");
 
 function post (req, res) {
-    let ok = !!newUser(req, res);
-    res.send({ ok });
+    if (!newUser(req, res)) 
+        return res.send({ok: false});
 }
 
 /**
@@ -24,12 +24,12 @@ async function newUser (req, res) {
 
     const id = req.app.snowflake.nextId();
     const token = auth.createToken(id);
-    const passHash = auth.createHash(pass);
+    const passHash = await auth.createHash(pass);
 
     await req.app.database
         .newUser({ id, username: user, password: passHash, token });
 
-    res.setHeader("authorization", token);
+    res.send({ok: true, token});
     return true;
 }
 
