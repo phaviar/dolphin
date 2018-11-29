@@ -36,7 +36,8 @@ profile_modal_close.addEventListener('click', (event) => {
 });
 input_message.addEventListener('keypress', (event) => {
     if (event.keyCode == 13 && !event.shiftKey) { // Check if the user doesn't mean new line and send.
-        socket.emit('message_create', { token: token, content: input_message.value })
+        socket.emit('message_create', { token: token, content: input_message.value });
+        console.log({ token: token, content: input_message.value });
         input_message.value = '';
         input_message.blur(); // Un focus
     }
