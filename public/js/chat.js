@@ -13,7 +13,8 @@ var chatbody = document.getElementById('chatbody');
 var profile_modal = document.getElementById('profile_modal');
 var profile_modal_close = document.getElementById('profile_modal_close');
 var input_message = document.getElementById('input_message');
-
+var token = localStorage.getItem("token");
+var socket = io.connect('http://localhost:8083/chat')
 dropdown.addEventListener('click', (event) => {
     event.stopPropagation();
     dropdown.classList.toggle('is-active');
@@ -35,6 +36,7 @@ profile_modal_close.addEventListener('click', (event) => {
 });
 input_message.addEventListener('keypress', (event) => {
     if (event.keyCode == 13 && !event.shiftKey) { // Check if the user doesn't mean new line and send.
+        socket.emit('message_create', { token: token, content: input_message.value })
         input_message.value = '';
         input_message.blur(); // Un focus
     }
