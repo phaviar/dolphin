@@ -22,8 +22,9 @@ function onFormSubmit () {
         var re_password = document.getElementById("retype_password_input");
         var re_pass = re_password.value;
         if (!validateInput(re_password, pass === re_pass)) return;
+        re_password.value = "";
     }
-
+    password.value = "";
     pass = btoa(pass);
     sendForm({ user: user, pass: pass });
 }

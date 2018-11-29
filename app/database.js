@@ -1,12 +1,17 @@
 const r = require("rethinkdbdash")({ db: "ChatApp" });
 
 class Database {
-    async getUser (name) {
-        return await r.table("users").get(name);
+    async getUser (id) {
+        return await r.table("users").get(id);
     }
 
-    async hasUsername(name) {
-        return await r.table("users").filter({username: name}).count() > 0;
+    async getUserByName (name) {
+        const users = await r.table("users").filter({username: name});
+        return users ? users[0] : null;
+    }
+
+    async hasUsername (name) {
+        return await r.table("users").filter({ username: name }).count() > 0;
     }
 
     async newUser ({ id, username, password, token }) {

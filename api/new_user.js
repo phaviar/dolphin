@@ -2,8 +2,8 @@ const express = require("express");
 const auth = require("../app/auth.js");
 const validate = require("../app/validation.js");
 
-function post (req, res) {
-    if (!newUser(req, res)) 
+async function post (req, res) {
+    if (!await newUser(req, res)) 
         return res.send({ok: false});
 }
 
@@ -28,7 +28,7 @@ async function newUser (req, res) {
 
     await req.app.database
         .newUser({ id, username: user, password: passHash, token });
-
+    console.log("sending");
     res.send({ok: true, token});
     return true;
 }
