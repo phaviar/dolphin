@@ -42,26 +42,22 @@ function sendForm (data, tokenAuth) {
         .catch(alert);
 }
 
-function tokenResponse ({ error }) {
-    if (!error) {
+function tokenResponse (res) {
+    if (res.ok) {
         // valid token
         redirect("/chat");
-    } else if (error === "unknown") {
-        // User does not exist, if token auth delete token and try with pass
-    } else if (error === "incorrect") {
-        // incorrect creds, if token auth delete
+    } else {
+        localStorage.removeItem("token");
     }
 }
 
-function passResponse ({ error, token }) {
-    if (!error) {
+function passResponse (res) {
+    if (res.ok) {
         // valid password
-    } else if (error === "unknown") {
-
-        // User does not exist, if token auth delete token and try with pass
-    } else if (error === "incorrect") {
+        localStorage.setItem("token", res.token);
+        redirect("/chat");
+    } else {
         document.getElementById("error").setAttribute("disabled", false);
-        // incorrect creds, if token auth delete
     }
 }
 

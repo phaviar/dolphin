@@ -2,7 +2,7 @@ const express = require("express");
 const auth = require("../app/auth.js");
 const validate = require("../app/validation.js");
 
-let error = false;
+let ok = false;
 
 /**
  * @param {express.Request} req
@@ -10,12 +10,12 @@ let error = false;
  */
 function post (req, res) {
     if (req.body.user && req.body.pass) { 
-        error = passwordAuth(req, res);
+        ok = !!passwordAuth(req, res);
     } else if (req.body.token) {
-        error = tokenAuth(req, res);
+        ok = !!tokenAuth(req, res);
     }
-    // else
-    res.send({ error });
+
+    res.send({ ok });
 }
 
 async function passwordAuth (req, res) {
@@ -26,16 +26,16 @@ async function passwordAuth (req, res) {
     pass = Buffer.from(pass, "base64").toString();
 
     if (!validate.username(user) || !validate.password(pass))
-        return "incorrect";
+        return;
 
     const userData = await req.app.database.getUser(user);
-    if (!userData) return "unknown";
+    if (!userData) return;
 
     if (!(await auth.comparePass(pass, userData.password)))
-        return "incorrect";
+        return;
 
     res.setHeader("authorization", userData.token);
-    return false;
+    return true;
 }
 
 async function tokenAuth (req, res) {
@@ -43,15 +43,15 @@ async function tokenAuth (req, res) {
     // Immediatelly redirect to chat if valid
     const { token } = req.body;
     
-    if (!validate.token(token)) return "incorrect";
+    if (!validate.token(token)) return;
 
     const tokenData = auth.destructToken(token);
     const user = req.app.database.getUser(tokenData.id);
-    if (!user) return "unknown";
+    if (!user) return;
 
-    if (user.token != token) return "incorrect";
+    if (user.token != token) return;
 
-    return false;
+    return true;
 }
 
 module.exports = post;
