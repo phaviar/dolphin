@@ -23,8 +23,8 @@ class Validation {
         const data = auth.destructToken(t);
         if (!data.id || !data.random || !data.timestamp) return false;
         return Validation.id(data.id) &&
-                data.random.length === 10 &&
-                new Date(data.timestamp).toString() === "Invalid Date";
+            data.random.length === 10 &&
+            new Date(data.timestamp).toString() !== "Invalid Date";
     }
 
     static content(c) {
