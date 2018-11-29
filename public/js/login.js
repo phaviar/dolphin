@@ -12,27 +12,14 @@ window.onload = function () {
 function onFormSubmit () {
     var username = document.getElementById("username_input");
     var password = document.getElementById("password_input");
-    var name = username.value,
+    var user = username.value,
         pass = password.value;
 
+    if (!validateInput(username, usernameRegex.test(user))) return;
+    if (!validateInput(password, passwordRegex.test(pass))) return;
 
-    if (!usernameRegex.test(name)) {
-        username.classList.remove("is-success");
-        return username.classList.add("is-danger");
-    }
-    username.classList.remove("is-danger");
-    username.classList.add("is-success");
-
-
-    if (!passwordRegex.test(pass)) {
-        password.classList.remove("is-success");
-        return password.classList.add("is-danger");
-    }
-    password.classList.remove("is-danger");
-    password.classList.add("is-success");
-
-    pass = btoa(password.value);
-    sendForm({ user: name, pass: pass }, false);
+    pass = btoa(pass);
+    sendForm({ user: user, pass: pass }, false);
 }
 
 function sendForm (data, tokenAuth) {
@@ -45,6 +32,17 @@ function sendForm (data, tokenAuth) {
         }).then(function (response) { return response.json(); })
         .then(tokenAuth ? tokenResponse : passResponse)
         .catch(alert);
+}
+
+function validateInput (elem, test) {
+    if (test) {
+        elem.classList.remove("is-danger");
+        elem.classList.add("is_success");
+        return true;
+    }
+    elem.classList.remove("is-success");
+    elem.classList.add("is_danger");
+    return false;
 }
 
 function tokenResponse (res) {

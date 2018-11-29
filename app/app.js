@@ -25,13 +25,13 @@ app.use(bodyParser.json());
 
 // Setup html serving
 app.get("/signup", (req, res) => {
-    res.sendFile(__dirname + "/views/signup.html");
+    res.sendFile(process.cwd() + "/views/signup.html");
 });
 app.get("/login", (req, res) => {
-    res.sendFile(__dirname + "/views/login.html");
+    res.sendFile(process.cwd() + "/views/login.html");
 });
 app.get("/chat", (req, res) => {
-    res.sendFile(__dirname + "/views/chat.html");
+    res.sendFile(process.cwd() + "/views/chat.html");
 });
 
 // Setup api endpoints

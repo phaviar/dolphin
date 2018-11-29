@@ -5,6 +5,10 @@ class Database {
         return await r.table("users").get(name);
     }
 
+    async hasUsername(name) {
+        return await r.table("users").filter({username: name}).count() > 0;
+    }
+
     async newUser ({ id, username, password, token }) {
         await r.table("users").insert({ id, username, password, token });
     }

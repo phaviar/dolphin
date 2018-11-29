@@ -13,41 +13,23 @@ function onFormSubmit () {
     var username = document.getElementById("username_input");
     var password = document.getElementById("password_input");
     var re_password = document.getElementById("retype_password_input");
-    var name = username.value,
+    var user = username.value,
         pass = password.value,
         re_pass = re_password.value;
 
-    // Validate Form
-    if (!usernameRegex.test(name)) {
-        username.classList.remove("is-success");
-        return username.classList.add("is-danger");
-    }
-    username.classList.remove("is-danger");
-    username.classList.add("is-success");
-
-
-    if (!passwordRegex.test(pass)) {
-        password.classList.remove("is-success");
-        return password.classList.add("is-danger");
-    }
-    password.classList.remove("is-danger");
-    password.classList.add("is-success");
-
-
-    if (pass !== re_pass) {
-        re_password.classList.remove("is-success");
-        return re_password.classList.add("is-danger");
-    }
-    re_password.classList.add("is-danger");
-    re_password.classList.add("is-success");
-
+    if (!validateInput(username, usernameRegex.test(user))) 
+        return;
+    if (!validateInput(password, passwordRegex.test(pass)))
+        return;
+    if (!validateInput(re_pass, pass === re_pass))
+        return;
 
     // Send as base64 because its the safest encryption
-    pass = btoa(password.value);
-    sendForm({ user: name, pass: pass }, false);
+    pass = btoa(pass);
+    sendForm({ user: user, pass: pass }, false);
 }
 
-function sendForm (data, tokenAuth) {
+function sendForm (data) {
     fetch("/new_user", {
             method: "POST",
             headers: {
@@ -59,13 +41,24 @@ function sendForm (data, tokenAuth) {
         .catch(alert);
 }
 
+function validateInput (elem, test) {
+    if (test) {
+        elem.classList.remove("is-danger");
+        elem.classList.add("is_success");
+        return true;
+    }
+    elem.classList.remove("is-success");
+    elem.classList.add("is_danger");
+    return false;
+}
+
 function passResponse (res) {
     if (res.ok) {
         // valid password
         localStorage.setItem("token", res.token);
         redirect("/chat");
     } else {
-        document.getElementById("error").setAttribute("disabled", false);
+        document.getElementById("error").setAttribute("disabled");
     }
 }
 
