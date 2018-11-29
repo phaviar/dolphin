@@ -26,7 +26,7 @@ async function passwordAuth (req, res) {
     pass = Buffer.from(pass, "base64").toString();
 
     if (!validate.username(user) || !validate.password(pass))
-        return "invalid";
+        return "incorrect";
 
     const userData = await req.app.database.getUser(user);
     if (!userData) return "unknown";
@@ -43,7 +43,7 @@ async function tokenAuth (req, res) {
     // Immediatelly redirect to chat if valid
     const { token } = req.body;
     
-    if (!validate.token(token)) return "invalid";
+    if (!validate.token(token)) return "incorrect";
 
     const tokenData = auth.destructToken(token);
     const user = req.app.database.getUser(tokenData.id);

@@ -5,7 +5,7 @@ var passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,100}$/;
 window.onload = function () {
     var token = localStorage.getItem("token");
     if (token) {
-      sendForm({token: token}, true);
+        sendForm({ token: token }, true);
     }
 };
 
@@ -27,7 +27,7 @@ function onFormSubmit () {
 
     var pass = btoa(password.value);
     var user = username.value;
-    sendForm({user: user, pass: pass}, false);
+    sendForm({ user: user, pass: pass }, false);
 }
 
 function sendForm (data, tokenAuth) {
@@ -44,9 +44,8 @@ function sendForm (data, tokenAuth) {
 
 function tokenResponse ({ error }) {
     if (!error) {
-        window.location.replace(window.location.hostname + "/chat");
-    } else if (error === "invalid") {
-        // Incorrect format
+        // valid token
+        redirect("/chat");
     } else if (error === "unknown") {
         // User does not exist, if token auth delete token and try with pass
     } else if (error === "incorrect") {
@@ -54,14 +53,18 @@ function tokenResponse ({ error }) {
     }
 }
 
-function passResponse ({ error }) {
+function passResponse ({ error, token }) {
     if (!error) {
         // valid password
-    } else if (error === "invalid") {
-        // Incorrect format
     } else if (error === "unknown") {
+
         // User does not exist, if token auth delete token and try with pass
     } else if (error === "incorrect") {
+        document.getElementById("error").setAttribute("disabled", false);
         // incorrect creds, if token auth delete
     }
+}
+
+function redirect (path) {
+    window.location.replace(window.location.hostname + path);
 }
