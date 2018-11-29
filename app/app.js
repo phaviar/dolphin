@@ -33,7 +33,9 @@ app.get("/login", (req, res) => {
 app.get("/chat", (req, res) => {
     res.sendFile(process.cwd() + "/views/chat.html");
 });
-
+app.get("*", (req, res) => {
+    res.sendFile(process.cwd() + "/views/404.html");
+});
 // Setup api endpoints
 app.post("/api/new_user", apiNewUser);
 app.post("/api/auth", apiAuth);
