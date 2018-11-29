@@ -2,6 +2,7 @@ const auth = require("./auth.js");
 
 const usernameRegex = /^[A-Za-z0-9_]{3,32}$/;
 const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,100}$/;
+
 const idRegex = /^[0-9]{15,25}$/;
 const tokenDecay = 604800000; // 7 days;
 
@@ -24,6 +25,15 @@ class Validation {
         return Validation.id(data.id) &&
                 data.random.length === 10 &&
                 new Date(data.timestamp).toString() === "Invalid Date";
+    }
+
+    static content(c) {
+        return c.length > 1 && c.length < 2000;
+    }
+
+    static cleanContent(c) {
+        // Fool Proof
+        return c.replace(/<|>/g, '');
     }
 }
 
