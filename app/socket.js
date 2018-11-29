@@ -27,6 +27,16 @@ function connection (socket) {
             timestamp
         });
     });
+
+    socket.on("message_edit", async data => {
+
+    });
+
+    socket.on("message_delete", async data => {
+
+    });
+
+    // Split into seperate files eventually
 }
 
 module.exports = connection;
