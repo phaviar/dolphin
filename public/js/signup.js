@@ -17,7 +17,7 @@ function onFormSubmit () {
         pass = password.value,
         re_pass = re_password.value;
 
-    if (!validateInput(username, usernameRegex.test(user))) 
+    if (!validateInput(username, usernameRegex.test(user)))
         return;
     if (!validateInput(password, passwordRegex.test(pass)))
         return;
@@ -44,11 +44,11 @@ function sendForm (data) {
 function validateInput (elem, test) {
     if (test) {
         elem.classList.remove("is-danger");
-        elem.classList.add("is_success");
+        elem.classList.add("is-success");
         return true;
     }
     elem.classList.remove("is-success");
-    elem.classList.add("is_danger");
+    elem.classList.add("is-danger");
     return false;
 }
 
