@@ -2,67 +2,67 @@
 <html lang="en">
 
 <head style="overflow: hidden; max-height: 100%;">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Signup - Dolphin</title>
-  <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-  <link rel="stylesheet" href="https://dl.dropboxusercontent.com/s/fp6wjqm9aw3bvs7/import.css?dl=0">
-  <!--^^^Might wanna self host this but it is okay for now - hexia^^^-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Signup - Dolphin</title>
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <link rel="stylesheet" href="https://dl.dropboxusercontent.com/s/fp6wjqm9aw3bvs7/import.css?dl=0">
+    <!--^^^Might wanna self host this but it is okay for now - hexia^^^-->
 </head>
 
 <!--This should only have username and password, don't implement email stuff in this, just use usernames-->
 <!--K-->
 
 <body style="background-color: #18191C; position: fixed; overflow-y: hidden; overflow: hidden; width: 100%;">
-  <section class="hero is-dark" style="background-color: #18191C;">
-    <div class="hero-body">
-      <div class="container">
-        <h1 class="title">
-          Signup
-        </h1>
-        <h2 class="subtitle">
-          An App For Chat
-        </h2>
-      </div>
+    <section class="hero is-dark" style="background-color: #18191C;">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">
+                    Signup
+                </h1>
+                <h2 class="subtitle">
+                    An App For Chat
+                </h2>
+            </div>
+        </div>
+    </section>
+    <div class="container" style="background-color: #18191C;">
+        <div class="modal is-active">
+            <div class="modal-content" style="overflow: hidden;">
+                <div class="field">
+                    <label class="label">Username - Must be between 3 and 32 and alphanumeric</label>
+                    <p class="control">
+                        <input class="input" type="email" placeholder="Username" style="background-color: #282f2f;color: #f7f7f7;" id="username_input">
+                    </p>
+                </div>
+                <div class="field">
+                    <label class="label">Password - Must be atleast 8 characters and include numbers, uppercase and lowercase letters</label>
+                    <p class="control">
+                        <input class="input" type="password" placeholder="Password" style="background-color: #282f2f; color: #f7f7f7;" id="password_input">
+                    </p>
+                </div>
+                <div class="field">
+                    <label class="label">Re-Enter Password</label>
+                    <p class="control">
+                        <input class="input" type="password" placeholder="Password" style="background-color: #282f2f; color: #f7f7f7;" id="retypepassword_input">
+                    </p>
+                </div>
+                <div class="field">
+                    <span class="tag is-danger" style="display: none;" id="error">Uh-oh! Looks like your username or password doesn't meet the terms!</span>
+                </div>
+                <div class="field">
+                    <p class="control">
+                        <button class="button" onclick="onFormSubmit()">
+                            Signup
+                        </button>
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
-  </section>
-  <div class="container" style="background-color: #18191C;">
-    <div class="modal is-active">
-      <div class="modal-content" style="overflow: hidden;">
-        <div class="field">
-          <label class="label">Username - Must be between 3 and 32 and alphanumeric</label>
-          <p class="control">
-            <input class="input" type="email" placeholder="Username" style="background-color: #282f2f;color: #f7f7f7;" id="username_input">
-          </p>
-        </div>
-        <div class="field">
-          <label class="label">Password - Must be atleast 8 characters and include numbers, uppercase and lowercase letters</label>
-          <p class="control">
-            <input class="input" type="password" placeholder="Password" style="background-color: #282f2f; color: #f7f7f7;" id="password_input">
-          </p>
-        </div>
-        <div class="field">
-          <label class="label">Re-Enter Password</label>
-          <p class="control">
-            <input class="input" type="password" placeholder="Password" style="background-color: #282f2f; color: #f7f7f7;" id="retypepassword_input">
-          </p>
-        </div>
-        <div class="field">
-          <span class="tag is-danger" style="display: none;" id="error">Uh-oh! Looks like your username or password doesn't meet the terms!</span>
-        </div>
-        <div class="field">
-          <p class="control">
-            <button class="button" onclick="onFormSubmit()">
-              Signup
-            </button>
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <img src="https://i.imgur.com/8TkEmzy.png" alt="">
-  <script src="/js/login.js"></script>
+    <img src="https://i.imgur.com/8TkEmzy.png" alt="">
+    <script src="/js/login.js"></script>
 </body>
 
 </html>

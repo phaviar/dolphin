@@ -2,63 +2,63 @@
 <html lang="en">
 
 <head style="overflow: hidden; max-height: 100%;">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Login - Dolphin</title>
-  <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-  <link rel="stylesheet" href="https://dl.dropboxusercontent.com/s/fp6wjqm9aw3bvs7/import.css?dl=0">
-  <!--^^^Might wanna self host this^^^-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login - Dolphin</title>
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <link rel="stylesheet" href="https://dl.dropboxusercontent.com/s/fp6wjqm9aw3bvs7/import.css?dl=0">
+    <!--^^^Might wanna self host this^^^-->
 </head>
 
 <!--This should only have username and password, don't implement email stuff in this, just use usernames-->
 <!--K-->
 
 <body style="background-color: #18191C; position: fixed; overflow-y: hidden; overflow: hidden; width: 100%;">
-  <section class="hero is-dark" style="background-color: #18191C;">
-    <div class="hero-body">
-      <div class="container">
-        <h1 class="title">
-          Login
-        </h1>
+    <section class="hero is-dark" style="background-color: #18191C;">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">
+                    Login
+                </h1>
 
-        <h2 class="subtitle">
-          An App For Chat
-        </h2>
-      </div>
+                <h2 class="subtitle">
+                    An App For Chat
+                </h2>
+            </div>
+        </div>
+    </section>
+    <div class="container" style="background-color: #18191C;">
+        <div class="modal is-active">
+            <div class="modal-content" style="overflow: hidden;">
+                <div class="field">
+                    <label class="label">Username</label>
+                    <p class="control">
+                        <input class="input" type="email" placeholder="Username" style="background-color: #282f2f;color: #f7f7f7;" id="username_input">
+                    </p>
+                </div>
+                <div class="field">
+                    <label class="label">Password</label>
+                    <p class="control">
+                        <input class="input" type="password" placeholder="Password" style="background-color: #282f2f; color: #f7f7f7;" id="password_input">
+                    </p>
+                </div>
+                <div class="field">
+                    <span class="tag is-danger" style="display: none;" id="error">Username or password incorrect!</span>
+                </div>
+                <div class="field">
+                    <p class="control">
+                        <button style="vertical-align: middle;" class="button" onclick="onFormSubmit()">
+                            Login
+                        </button>
+                        <a href="/signup" style="vertical-align: middle;" class="title is-5">Don't already have a account?</a>
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
-  </section>
-  <div class="container" style="background-color: #18191C;">
-    <div class="modal is-active">
-      <div class="modal-content">
-        <div class="field">
-          <label class="label">Username</label>
-          <p class="control">
-            <input class="input" type="email" placeholder="Username" style="background-color: #282f2f;color: #f7f7f7;" id="username_input">
-          </p>
-        </div>
-        <div class="field">
-          <label class="label">Password</label>
-          <p class="control">
-            <input class="input" type="password" placeholder="Password" style="background-color: #282f2f; color: #f7f7f7;" id="password_input">
-          </p>
-        </div>
-        <div class="field">
-          <span class="tag is-danger" id="error">Username or password incorrect!</span>
-        </div>
-        <div class="field">
-          <p class="control">
-            <button style="vertical-align: middle;" class="button" onclick="onFormSubmit()">
-              Login
-            </button>
-            <a href="/signup" style="vertical-align: middle;" class="title is-5">Don't already have a account?</a>
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <img src="https://i.imgur.com/8TkEmzy.png" alt="">
-  <script src="/js/login.js"></script>
+    <img src="https://i.imgur.com/8TkEmzy.png" alt="">
+    <script src="../public/js/login.js"></script>
 </body>
 
 </html>
