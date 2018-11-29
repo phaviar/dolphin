@@ -2,80 +2,100 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Dolphin</title>
-  <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-  <link rel="stylesheet" href="https://dl.dropboxusercontent.com/s/fp6wjqm9aw3bvs7/import.css?dl=0">
-  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
-  <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dolphin</title>
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <link rel="stylesheet" href="https://dl.dropboxusercontent.com/s/fp6wjqm9aw3bvs7/import.css?dl=0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 </head>
 
 <body>
-  <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
-    <div id=" navbarBasicExample" class="navbar-menu">
-      <div class="navbar-start">
-        <figure class="image is-64x64" style="padding: 5px; style=" vertical-align:middle"">
-          <img class="is-rounded" src="https://cdn.discordapp.com/attachments/508114031475949593/517487421236183050/avatar.png">
-        </figure>
-        <div class="navbar-item">
-          <strong>breaddog</strong>
-        </div>
-      </div>
-  </nav>
-  <div id="app">
-    <div class="container is-fluid" style="padding: 10px;">
-      <article class="media">
-        <figure class="media-left">
-          <p class="image is-64x64">
-            <img class="is-rounded" src="https://cdn.discordapp.com/attachments/508114031475949593/517487421236183050/avatar.png">
-          </p>
-        </figure>
-        <div class="media-content">
-          <div class="content">
-            <p>
-              <strong>breaddog</strong>
-              <br>
-              shiba inus are gud dogs.
-            </p>
-          </div>
-        </div>
-        <div class="media-right">
-          <div class="dropdown is-right">
-            <div class="dropdown-trigger">
-              <span class="icon is-small" aria-haspopup="true" aria-controls="dropdown-menu">
-                <i class="fas fa-ellipsis-h" aria-hidden="true"></i>
-              </span>
+    <div id="app">
+        <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
+            <div id=" navbarBasicExample" class="navbar-menu">
+                <div class="navbar-start">
+
+                </div>
+
+                <a class="navbar-item" id="profile">
+                    <strong>{{ username }}</strong>
+                    <a class="image is-64x64" style="padding: 5px;vertical-align:middle">
+                        <img class=" is-rounded" src="https://cdn.discordapp.com/attachments/508114031475949593/517487421236183050/avatar.png">
+                    </a>
+                </a>
             </div>
-            <div class="dropdown-menu" id="dropdown-menu" role="menu">
-              <div class="dropdown-content">
-                <a href="#" class="dropdown-item">
-                  Star
-                </a>
-                <a href="#" class="dropdown-item">
-                  Edit
-                </a>
-                <hr class="dropdown-divider">
-                <a href="#" class="dropdown-item" style="color: #e74c3c;">
-                  Delete
-                </a>
-              </div>
+        </nav>
+
+        <div class="modal" id="profile_modal">
+            <div class="modal-background"></div>
+            <div class="modal-content">
+                <div class="card" style="flex-direction: column;">
+                    <div class="card-content">
+                        <div class="media">
+                            <div class="content">
+                                <div class="container is-fluid has-text-centered">
+                                    <strong>{{ username }}</strong>
+                                    <a class="image is-128x128" style="padding: 5px;vertical-align:middle">
+                                        <img class=" is-rounded" src="https://cdn.discordapp.com/attachments/508114031475949593/517487421236183050/avatar.png">
+                                    </a>
+                                </div>
+                            </div>
+                            <button id="profile_modal_close" class="modal-close is-large" aria-label="close"></button>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </article>
-      <hr>
+        <div class="container is-fluid" style="padding: 10px;">
+            <article class="media" v-for="">
+                <figure class="media-left">
+                    <p class="image is-64x64">
+                        <img class="is-rounded" src="https://cdn.discordapp.com/attachments/508114031475949593/517487421236183050/avatar.png">
+                    </p>
+                </figure>
+                <div class="media-content">
+                    <div class="content">
+                        <p>
+                            <strong>breaddog</strong>
+                            <br>
+                            shiba inus are gud dogs.
+                        </p>
+                    </div>
+                </div>
+                <div class="media-right">
+                    <div class="dropdown is-right">
+                        <div class="dropdown-trigger">
+                            <button class="button is-rounded" aria-haspopup="true" aria-controls="dropdown-menu">
+                                <span class="icon is-small">
+                                    <i class="fas fa-ellipsis-h" aria-hidden="true"></i>
+                                </span>
+                            </button>
+                        </div>
+                        <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                            <div class="dropdown-content">
+                                <!-- <a class="dropdown-item">
+                                    Star
+                                </a> -->
+                                <a class="dropdown-item" style="color: #fff;transition: all 200ms ease;">
+                                    Edit
+                                </a>
+                                <hr class="dropdown-divider">
+                                <a class="dropdown-item" style="color: #e74c3c; transition: all 200ms ease;" id="deletemsg">
+                                    Delete
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <hr>
+        </div>
+        <textarea name="name" rows="8" cols="80"></textarea>
     </div>
-  </div>
-  <script>
-    let app = new Vue({ el: '#app' })
-    var dropdown = document.querySelector('.dropdown');
-    dropdown.addEventListener('click', function (event) {
-      event.stopPropagation();
-      dropdown.classList.toggle('is-active');
-    });
-  </script>
+    <script src="/js/chat.js"></script>
 </body>
 
 </html>
