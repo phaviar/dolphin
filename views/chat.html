@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="background-color: #10131A;">
 
 <head>
     <meta charset="UTF-8">
@@ -13,10 +13,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
 </head>
 
-<body id="chatbody">
-    <div id="app">
-        <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
-            <div id=" navbarBasicExample" class="navbar-menu">
+<body id="chatbody" style="background-color: #10131A;">
+    <div id="app" style="background-color: #10131A;">
+        <nav class="navbar is-dark" role="navigation" aria-label="main navigation" style="background-color: #10131A;">
+            <div id="navbar" class="navbar-menu">
                 <div class="navbar-start">
 
                 </div>
@@ -29,7 +29,15 @@
                 </a>
             </div>
         </nav>
-
+        <div class="modal is-active" id="loading_modal">
+            <div class="modal-background" style="background-color: #10131A;">
+                <img src="https://i.imgur.com/8TkEmzy.png" style="margin: auto;" alt="">
+            </div>
+            <div class="modal-content has-text-centered">
+                <h1 class="title" style="overflow: hidden;">Loading</h1>
+                <img src="http://i.imgur.com/4aeVMkx.gif" alt="">
+            </div>
+        </div>
         <div class="modal" id="profile_modal">
             <div class="modal-background"></div>
             <div class="modal-content">
@@ -69,7 +77,7 @@
                 <div class="media-right">
                     <div class="dropdown is-right">
                         <div class="dropdown-trigger">
-                            <button class="button is-rounded" aria-haspopup="true" aria-controls="dropdown-menu">
+                            <button class="button is-rounded" aria-haspopup="true" style="background-color: #171a20;color: #f7f7f7; border-color: #212733" aria-controls="dropdown-menu">
                                 <span class="icon is-small">
                                     <i class="fas fa-ellipsis-h" aria-hidden="true"></i>
                                 </span>
@@ -99,13 +107,13 @@
   bottom: 0;
   left: 0;
   padding: 1rem;
-  text-align: center;">
+  text-align: center;background-color: #10131A;">
             <div class="container">
-                <textarea class="textarea has-fixed-size" id="input_message" name="name" rows="1" cols="80"></textarea>
+                <textarea class="textarea has-fixed-size" style="background-color: #171a20;color: #f7f7f7; border-color: #212733" id="input_message" name="name" rows="1" cols="80"></textarea>
             </div>
         </section>
     </div>
-    <script src="/js/chat.js"></script>
+    <script src="/js/chat.js" async></script>
 </body>
 
 </html>
