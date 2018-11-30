@@ -18,7 +18,6 @@ const port = 80;
 const apiAuth = require("../api/auth.js");
 const apiNewUser = require("../api/new_user.js");
 const apiFetchUser = require("../api/fetch_user.js");
-const apiDecToken = require("../api/decontruct_token.js");
 
 app.snowflake = new Snowflake();
 app.limiter = new RateLimiter(3, 5);
@@ -44,7 +43,6 @@ app.get("*", (req, res) => {
 app.post("/api/new_user", apiNewUser);
 app.post("/api/auth", apiAuth);
 app.post("/api/fetchuser", apiFetchUser);
-app.post("/api/dectoken", apiDecToken);
 
 // Create socket connection only for /chat endpoint
 io.of("/chat").on("connection", socketHandler);
