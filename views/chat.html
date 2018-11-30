@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" style="background-color: #10131A;">
+<html lang="en" style="background-color: #10131A;overflow: hidden;">
 
 <head>
     <meta charset="UTF-8">
@@ -58,56 +58,61 @@
                 </div>
             </div>
         </div>
-        <div class="container is-fluid" style="padding: 10px;">
-            <article class="media" v-for="">
-                <figure class="media-left">
-                    <p class="image is-64x64">
-                        <img class="is-rounded" src="https://cdn.discordapp.com/attachments/508114031475949593/517487421236183050/avatar.png">
-                    </p>
-                </figure>
-                <div class="media-content">
-                    <div class="content">
-                        <p>
-                            <strong>breaddog</strong>
-                            <br>
-                            shiba inus are gud dogs.
+        <div style="padding: 10px;overflow-x: visible; overflow-y: scroll; height: 85vh;">
+            <div style="overflow-x: visible;" v-for="message in messages">
+                <article class="media">
+                    <figure class="media-left">
+                        <p class="image is-64x64">
+                            <img class="is-rounded" src="https://cdn.discordapp.com/attachments/508114031475949593/517487421236183050/avatar.png">
                         </p>
-                    </div>
-                </div>
-                <div class="media-right">
-                    <div class="dropdown is-right">
-                        <div class="dropdown-trigger">
-                            <button class="button is-rounded" aria-haspopup="true" style="background-color: #171a20;color: #f7f7f7; border-color: #212733" aria-controls="dropdown-menu">
-                                <span class="icon is-small">
-                                    <i class="fas fa-ellipsis-h" aria-hidden="true"></i>
-                                </span>
-                            </button>
+                    </figure>
+                    <div class="media-content">
+                        <div class="content">
+                            <p>
+                                <strong>{{ message.ausername }}</strong>
+                                <br>
+                                <div class="content">
+                                    {{ message.content }}
+                                </div>
+                            </p>
                         </div>
-                        <div class="dropdown-menu" id="dropdown-menu" role="menu">
-                            <div class="dropdown-content">
-                                <!-- <a class="dropdown-item">
+                    </div>
+                    <div class="media-right">
+                        <div class="dropdown is-right">
+                            <div class="dropdown-trigger">
+                                <button class="button is-rounded" aria-haspopup="true" style="background-color: #171a20;color: #f7f7f7; border-color: #212733" aria-controls="dropdown-menu">
+                                    <span class="icon is-small">
+                                        <i class="fas fa-ellipsis-h" aria-hidden="true"></i>
+                                    </span>
+                                </button>
+                            </div>
+                            <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                                <div class="dropdown-content">
+                                    <!-- <a class="dropdown-item">
                                     Star
                                 </a> -->
-                                <a class="dropdown-item" style="color: #fff;transition: all 200ms ease;">
-                                    Edit
-                                </a>
-                                <hr class="dropdown-divider">
-                                <a class="dropdown-item" style="color: #e74c3c; transition: all 200ms ease;" id="deletemsg">
-                                    Delete
-                                </a>
+                                    <a class="dropdown-item" style="color: #fff;transition: all 200ms ease;">
+                                        Edit
+                                    </a>
+                                    <hr class="dropdown-divider">
+                                    <a class="dropdown-item" style="color: #e74c3c; transition: all 200ms ease;" id="deletemsg">
+                                        Delete
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </article>
+                </article>
+            </div>
             <hr>
         </div>
         <section class="section" style="  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  padding: 1rem;
-  text-align: center;background-color: #10131A;">
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    position: absolute;
+    text-align: center;background-color: #10131A;">
             <div class="container">
                 <textarea class="textarea has-fixed-size" style="background-color: #171a20;color: #f7f7f7; border-color: #212733" id="input_message" name="name" rows="1" cols="80"></textarea>
             </div>
