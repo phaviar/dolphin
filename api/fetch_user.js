@@ -11,14 +11,14 @@ async function post (req, res) {
  * @param {express.Response} res
  */
 async function fetchUser (req, res) {
-    if (!req.body.id) return;
+    if (!req.body.id) return res.send({ ok: false });
 
-    let id = req.body.id.toString();
-    if (!validate.id(id)) return;
+    let id = req.body.id;
+    if (!validate.id(id)) return res.send({ ok: false });
 
     const user = await req.app.database.getUser(id);
-    res.send({ username: user.username });
-
+    if (!user) return res.send({ ok: false });
+    res.send({ ok: true, username: user.username });
 }
 
 module.exports = post;
