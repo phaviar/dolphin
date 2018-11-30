@@ -1,10 +1,23 @@
-let app = new Vue({
-    el: '#app',
-    data: {
-        messages: [],
-        username: "funnbot"
-    }
-});
+var token = localStorage.getItem("token");
+window.onload = function () {
+    if (!token) window.location.replace("/login");
+};
+fetch('/api/fetchuser', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ id: atob(token).split(".")[0] })
+    }).then(function (response) { return response.json(); })
+    .then((parsed) => {
+        let app = new Vue({
+            el: '#app',
+            data: {
+                messages: [],
+                username: parsed.username
+            }
+        });
+    }).catch(alert);
 var dropdown = document.querySelector('.dropdown');
 var global = document.querySelector('html');
 var deletemsg = document.getElementById('deletemsg');
@@ -13,7 +26,6 @@ var chatbody = document.getElementById('chatbody');
 var profile_modal = document.getElementById('profile_modal');
 var profile_modal_close = document.getElementById('profile_modal_close');
 var input_message = document.getElementById('input_message');
-var token = localStorage.getItem("token");
 var socket = io.connect('http://localhost:8083/chat')
 dropdown.addEventListener('click', (event) => {
     event.stopPropagation();
@@ -37,7 +49,6 @@ profile_modal_close.addEventListener('click', (event) => {
 input_message.addEventListener('keypress', (event) => {
     if (event.keyCode == 13 && !event.shiftKey) { // Check if the user doesn't mean new line and send.
         socket.emit('message_create', { token: token, content: input_message.value });
-        console.log({ token: token, content: input_message.value });
         input_message.value = '';
         input_message.blur(); // Un focus
     }
