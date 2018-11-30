@@ -1,27 +1,33 @@
 var token = localStorage.getItem("token");
+var id = atob(token).split(".")[0];
 var username;
 if (!token) window.location.replace("/login");
-
-async function run () {
-    await fetch('/api/fetchuser', { // Load vals
+async function getUsername (id) {
+    return await fetch('/api/fetchuser', { // Load vals
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ id: atob(token).split(".")[0] })
+            body: JSON.stringify({ id: id })
         }).then(function (response) { return response.json(); })
-        .then((parsed) => { username = parsed.username; }).catch(alert);
-    console.log('sss');
+        .then((parsed) => { return parsed.username; }).catch(alert);
+}
+async function run () {
+    let username = await getUsername(id);
     let app = new Vue({
         el: '#app',
         data: {
-            messages: [],
+            messages: [{
+                content: 'Doggos',
+                author: '',
+                ausername: 'HexiaLabs'
+            }],
             username: username
         }
     });
     setTimeout(() => {
         document.getElementById('loading_modal').classList.remove('is-active');
-    }, 500);
+    }, 250);
     var dropdown = document.querySelector('.dropdown');
     var global = document.querySelector('html');
     var deletemsg = document.getElementById('deletemsg');
@@ -53,6 +59,8 @@ async function run () {
     input_message.addEventListener('keypress', (event) => {
         if (event.keyCode == 13 && !event.shiftKey) { // Check if the user doesn't mean new line and send.
             socket.emit('message_create', { token: token, content: input_message.value });
+
+            app.messages.push({ ausername: username, author: id, content: input_message.value });
             input_message.value = '';
             input_message.blur(); // Un focus
         }
