@@ -1,5 +1,5 @@
 const auth = require("./auth.js");
-const app = require("./app.js");
+const app = require("../../server.js");
 const validate = require("./validation.js");
 
 function connection (socket) {

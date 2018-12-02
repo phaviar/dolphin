@@ -8,17 +8,17 @@ const server = require("http").Server(app);
 const io = require("socket.io")(server);
 app.io = io;
 module.exports = app;
-const Snowflake = require("./snowflake.js");
-const RateLimiter = require("./ratelimiter.js");
-const Database = require("./database");
-const socketHandler = require("./socket.js");
+const Snowflake = require("./app/snowflake.js");
+const RateLimiter = require("./app/ratelimiter.js");
+const Database = require("./app/database");
+const socketHandler = require("./app/socket.js");
 const port = 80;
 
 // API
-const apiAuth = require("../api/auth.js");
-const apiNewUser = require("../api/new_user.js");
-const apiFetchUser = require("../api/fetch_user.js");
-const apiFetchMessages = require("../api/fetch_messages.js");
+const apiAuth = require("./api/auth.js");
+const apiNewUser = require("./api/new_user.js");
+const apiFetchUser = require("./api/fetch_user.js");
+const apiFetchMessages = require("./api/fetch_messages.js");
 
 app.snowflake = new Snowflake();
 app.limiter = new RateLimiter(3, 5);
