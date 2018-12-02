@@ -6,7 +6,7 @@ class Database {
     }
 
     async getUserByName (name) {
-        const users = await r.table("users").filter({username: name});
+        const users = await r.table("users").filter({ username: name });
         return users ? users[0] : null;
     }
 
@@ -28,6 +28,13 @@ class Database {
 
     async newMessage ({ id, author, content, timestamp }) {
         await r.table("messages").insert({ id, author, content, timestamp });
+    }
+
+    async deleteMessage (id) {
+        await r.table("messages").get(id).delete();
+    }
+    async getMessage (id) {
+        return await r.table("messages").get(id);
     }
 
     async fetchMessages () {
