@@ -13,7 +13,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
 </head>
 
-<body id="chatbody" style="background-color: #10131A;">
+<body id="chatbody" style="background-color: #10131A; overflow: hidden;">
     <div id="app" style="background-color: #10131A;">
         <nav class="navbar is-dark" role="navigation" aria-label="main navigation" style="background-color: #10131A;">
             <div id="navbar" class="navbar-menu">
@@ -58,8 +58,9 @@
                 </div>
             </div>
         </div>
-        <div style="padding: 10px;overflow-x: visible; overflow-y: scroll; height: 85vh;">
+        <div style="padding: 10px;overflow-x: visible; overflow-y: scroll; height: 85vh;" id="messages">
             <div style="overflow-x: visible;" v-for="message in messages">
+                <div style="display: none;">{{ message.id }}</div>
                 <article class="media">
                     <figure class="media-left">
                         <p class="image is-64x64">
@@ -70,15 +71,15 @@
                         <div class="content">
                             <p>
                                 <strong>{{ message.ausername }}</strong>
-                                <br>
                                 <div class="content">
-                                    {{ message.content }}
+                                    <template v-for="line in message.content.split('\n')">{{line}}<br></template>
+                                    <!-- Thanks stackoverflow ^ lol -->
                                 </div>
                             </p>
                         </div>
                     </div>
                     <div class="media-right">
-                        <div class="dropdown is-right">
+                        <div v-if="message.author === id" class="dropdown is-right">
                             <div class="dropdown-trigger">
                                 <button class="button is-rounded" aria-haspopup="true" style="background-color: #171a20;color: #f7f7f7; border-color: #212733" aria-controls="dropdown-menu">
                                     <span class="icon is-small">
