@@ -1,0 +1,77 @@
+body {
+    background-color: #10131A !important;
+    overflow: hidden !important;
+}
+
+html {
+    background-color: #10131A;
+    overflow: hidden;
+}
+
+nav {
+    background-color: #10131A !important;
+}
+
+img {
+    margin: auto;
+}
+
+.card {
+    flex-direction: column !important;
+}
+
+.hero {
+    background-color: #10131A !important;
+}
+
+.modal-backround {
+    background-color: #10131A !important;
+}
+
+.container {
+    background-color: #10131A !important;
+}
+
+.messagediv {
+    padding: 10px;
+    overflow-x: visible;
+    overflow-y: scroll;
+    height: 85vh;
+}
+
+.chatmessage {
+    overflow-x: visible;
+}
+
+.button {
+    background-color: #171a20 !important;
+    color: #f7f7f7 !important;
+    border-color: #212733 !important;
+}
+
+.dropdown-item {
+    color: #fff !important;
+    transition: all 200ms ease !important;
+}
+
+.deldropdown-item {
+    color: #e74c3c;
+    transition: all 200ms ease;
+}
+
+.section {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    position: absolute;
+    text-align: center;
+    background-color: #10131A;
+}
+
+.textarea {
+    background-color: #171a20;
+    color: #f7f7f7;
+    border-color: #212733
+}
