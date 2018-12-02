@@ -1,9 +1,10 @@
 var token = localStorage.getItem("token");
+if (!token) window.location.replace("/login");
+
 var id = atob(token).split(".")[0];
 var username;
 var cache = [];
 var socket = io.connect('http://localhost:8083/chat');
-if (!token) window.location.replace("/login");
 async function getUsername (id) {
     return await fetch('/api/fetchuser', { // Load vals
             method: "POST",
