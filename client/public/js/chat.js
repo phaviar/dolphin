@@ -4,6 +4,7 @@ if (!token) window.location.replace("/login");
 var id = atob(token).split(".")[0];
 var username;
 var cache = [];
+var messages;
 
 var socket = io.connect({
     transportOptions: {
@@ -17,24 +18,36 @@ var socket = io.connect({
 
 
 async function getUsername (id) {
-    return await fetch('/api/fetchuser', { // Load vals
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ id: id })
-        }).then(function (response) { return response.json(); })
-        .then((parsed) => { return parsed.username; }).catch(alert);
+    return new Promise((resolve, reject) => {
+        fetch('/api/fetchuser', { // Load vals
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ id: id })
+            }).then(function (response) { return response.json(); })
+            .then((parsed) => {
+                if (parsed.username) {
+                    resolve(parsed.username);
+                } else { reject() }
+            }).catch(alert);
+    });
 }
 async function fetchMessages () {
-    return await fetch('/api/fetchmessages', {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ token: token })
-        }).then(function (response) { return response.json(); })
-        .then((parsed) => { return parsed.messages; }).catch(alert);
+    return new Promise((resolve, reject) => {
+        fetch('/api/fetchmessages', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ token: token })
+            }).then(function (response) { return response.json(); })
+            .then((parsed) => {
+                if (parsed.messages) {
+                    resolve(parsed.messages);
+                } else { reject() }
+            }).catch(alert);
+    });
 }
 async function mapUsernames (message) {
     if (!cache.includes(message.author)) {
@@ -43,7 +56,8 @@ async function mapUsernames (message) {
     }
     return message.ausername = cache.find(user => user.id === message.author).username;
 }
-async function update () {
+// Creates event listeners for all dropdowns
+function update () {
     document.querySelectorAll('.dropdown').forEach(dropdown => {
         dropdown.addEventListener('click', (event) => {
             event.stopPropagation();
@@ -65,14 +79,54 @@ async function update () {
         });
     });
 }
-async function run () {
-    let username = await getUsername(id);
-    let messages = await fetchMessages();
-    messages.map(mapUsernames); // Cache usernames & use them
-    messages.sort((a, b) => {
-        return a.timestamp - b.timestamp; // Sort messages by timestamp, yes this is needed.
+socket.on('message_create', async data => {
+    if (!cache.includes(data.author)) {
+        if (!cache.includes(data.author)) {
+            let name = await getUsername(data.author);
+            let name = await getUsername(data.author);
+            cache.push({ id: data.author, username: name });
+            cache.push({ id: data.author, username: name });
+        }
+    }
+    app.messages.push({ id: data.id, timestamp: data.timestamp, ausername: cache.find(user => user.id === data.author).username, author: data.author, content: data.content });
+    app.messages.push({ id: data.id, timestamp: data.timestamp, ausername: cache.find(user => user.id === data.author).username, author: data.author, content: data.content });
+    setTimeout(() => {
+        setTimeout(() => {
+            messagebody.scrollTop = messagebody.scrollHeight; // Scroll to bottom of messages	             messagebody.scrollTop = messagebody.scrollHeight; // Scroll to bottom of messages
+            update();
+            update();
+        }, 50); // Delay is needed for vue to render	         }, 50); // Delay is needed for vue to render
     });
+});
+socket.on('message_delete', async data => {
+    socket.on('message_delete', async data => {
+        app.messages.splice(app.messages.indexOf(app.messages.find(message => message.id === data.id)), 1);
+        app.messages.splice(app.messages.indexOf(app.messages.find(message => message.id === data.id)), 1);
+    });
+});
+socket.on('disconnect', () => {
+    window.location.replace("/login");
+});
 
+function init () {
+    return new Promise((resolve, reject) => {
+        getUsername(id).then(usernameReturned => {
+            username = usernameReturned;
+        }).catch();
+        fetchMessages().then(messagesReturned => {
+            messagesReturned.map(mapUsernames); // Cache usernames & use them
+            messages = messagesReturned.sort((a, b) => {
+                return a.timestamp - b.timestamp; // Sort messages by timestamp.
+            });
+
+            resolve(messagesReturned)
+        }).catch();
+    })
+}
+(async () => {
+    messages = await init(); // This initalizes the message history & the logged in user's info.
+
+    // CREATE VUE INSTANCE
     let app = new Vue({
         el: '#app',
         data: {
@@ -81,19 +135,9 @@ async function run () {
             id: id
         }
     });
-    var global = document.querySelector('html');
-    var profile = document.getElementById('profile');
-    var messagebody = document.getElementById('messages');
-    var chatbody = document.getElementById('chatbody');
-    var profile_modal = document.getElementById('profile_modal');
-    var profile_modal_close = document.getElementById('profile_modal_close');
-    var input_message = document.getElementById('input_message');
-    setTimeout(() => {
-        messages.push(); // Very important, updates usernames
-        document.getElementById('loading_modal').classList.remove('is-active');
-        messagebody.scrollTop = messagebody.scrollHeight; // Scroll to bottom of messages
-    }, 250);
-    socket.on('message_create', async data => {
+
+    // SOCKET IO LISTENERS
+    socket.on('message_create', data => {
         if (!cache.includes(data.author)) {
             let name = await getUsername(data.author);
             cache.push({ id: data.author, username: name });
@@ -104,37 +148,51 @@ async function run () {
             update();
         }, 50); // Delay is needed for vue to render
     });
-    socket.on('message_delete', async data => {
+    socket.on('message_delete', data => {
         app.messages.splice(app.messages.indexOf(app.messages.find(message => message.id === data.id)), 1);
     });
     socket.on('disconnect', () => {
         window.location.replace("/login");
     });
-    update();
-    // Closes the dropdown if anything else is clicked. ^ Takes priority if dropdown is clicked.
+
+    // DOM 
+    var global = document.querySelector('html'); // Global DOM, used for click & keyboard events
+    var messagebody = document.getElementById('messages'); // This is used to control the scroll of the messages.
+    var chatbody = document.getElementById('chatbody');
+    var input_message = document.getElementById('input_message');
+
+    setTimeout(() => {
+        messages.push(); // Very important, updates usernames
+        messagebody.scrollTop = messagebody.scrollHeight; // Scroll to bottom of messages
+
+        document.getElementById('loading_modal').classList.remove('is-active');
+    }, 10);
+
+    update(); // This initalizes the onlickevents of the dropdown.
+
+    // This is for typing sending messages
+    input_message.addEventListener('keypress', (event) => {
+        // Check if the user doesn't mean new line and send.
+        if (event.keyCode == 13 && !event.shiftKey && input_message.value.trim().length > 0) {
+            socket.emit('message_create', { token: token, content: input_message.value });
+            input_message.value = '';
+            // Un focus the message send textbox, don't worry we auto refocus it when they start typing again
+            input_message.blur();
+        }
+    });
+
+    // This closes all dropdowns when anything except a dropdown is clicked.
     global.addEventListener('click', (event) => {
-        // event.stopPropagation(); disabled for now, might need to use this in other things
         document.querySelectorAll('.dropdown').forEach(drop => {
             drop.classList.remove('is-active');
         });
     });
-    profile.addEventListener('click', (event) => {
-        profile_modal.classList.add('is-active');
-    });
-    profile_modal_close.addEventListener('click', (event) => {
-        profile_modal.classList.remove('is-active');
-    });
-    input_message.addEventListener('keypress', (event) => {
-        if (event.keyCode == 13 && !event.shiftKey && input_message.value.trim().length > 0) { // Check if the user doesn't mean new line and send.
-            socket.emit('message_create', { token: token, content: input_message.value });
-            input_message.value = '';
-            input_message.blur(); // Un focus
-        }
-    });
+
+    // This focuses the textbox when the user starts to type. This is a really nice thing to have.
     global.addEventListener('keypress', (event) => {
         if (event.target.id === chatbody.id) {
-            input_message.focus(); // This is a really nice thing to have.
+            input_message.focus();
         }
     });
-}
-run();
+
+})();
