@@ -4,7 +4,18 @@ if (!token) window.location.replace("/login");
 var id = atob(token).split(".")[0];
 var username;
 var cache = [];
-var socket = io.connect(window.location.host);
+
+var socket = io.connect({
+    transportOptions: {
+        polling: {
+            extraHeaders: {
+                "authentication": token
+            }
+        }
+    }
+});
+
+
 async function getUsername (id) {
     return await fetch('/api/fetchuser', { // Load vals
             method: "POST",
@@ -95,6 +106,9 @@ async function run () {
     });
     socket.on('message_delete', async data => {
         app.messages.splice(app.messages.indexOf(app.messages.find(message => message.id === data.id)), 1);
+    });
+    socket.on('disconnect', () => {
+        window.location.replace("/login");
     });
     update();
     // Closes the dropdown if anything else is clicked. ^ Takes priority if dropdown is clicked.

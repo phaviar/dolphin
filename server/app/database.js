@@ -1,3 +1,4 @@
+const auth = require("./auth.js");
 const r = require("rethinkdbdash")({ db: "ChatApp" });
 
 class Database {
@@ -24,6 +25,12 @@ class Database {
 
     async deleteUser (id) {
         await r.table("users").get(id).delete();
+    }
+
+    async authenticateToken (token) {
+        const tokenData = auth.destructToken(token);
+        const userData = await this.getUser(tokenData.id);
+        return !!userData;
     }
 
     async newMessage ({ id, author, content, timestamp }) {
