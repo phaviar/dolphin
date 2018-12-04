@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" v-on:click.native="closeDropdowns">
 
 <head>
     <meta charset="UTF-8">
@@ -19,100 +19,225 @@
         <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
             <div id="navbar" class="navbar-menu">
                 <div class="navbar-start">
-
-                </div>
-
-                <a class="navbar-item" id="profile">
-                    <strong>{{ username }}</strong>
-                    <a class="image is-64x64" style="padding: 5px;vertical-align:middle">
-                        <img class=" is-rounded" src="/assets/avatar.png">
+                    <a class="navbar-item">
+                        Server Name
+                        <a class="image is-64x64" style="padding: 5px;vertical-align:middle">
+                            <img class=" is-rounded" src="/assets/avatar.png">
+                        </a>
                     </a>
+                    <a class="navbar-item">
+                        Server Name
+                        <a class="image is-64x64" style="padding: 5px;vertical-align:middle">
+                            <img class=" is-rounded" src="/assets/avatar.png">
+                        </a>
+                    </a>
+                    <a class="navbar-item">
+                        Server Name
+                        <a class="image is-64x64" style="padding: 5px;vertical-align:middle">
+                            <img class=" is-rounded" src="/assets/avatar.png">
+                        </a>
+                    </a>
+                    <a class="navbar-item">
+                        Server Name
+                        <a class="image is-64x64" style="padding: 5px;vertical-align:middle">
+                            <img class=" is-rounded" src="/assets/avatar.png">
+                        </a>
+                    </a>
+                    <a class="navbar-item">
+                        Server Name
+                        <a class="image is-64x64" style="padding: 5px;vertical-align:middle">
+                            <img class=" is-rounded" src="/assets/avatar.png">
+                        </a>
+                    </a>
+                    <a class="navbar-item">
+                        Server Name
+                        <a class="image is-64x64" style="padding: 5px;vertical-align:middle">
+                            <img class=" is-rounded" src="/assets/avatar.png">
+                        </a>
+                    </a>
+                    <a class="navbar-item">
+                        Server Name
+                        <a class="image is-64x64" style="padding: 5px;vertical-align:middle">
+                            <img class=" is-rounded" src="/assets/avatar.png">
+                        </a>
+                    </a>
+                    <a class="navbar-item">
+                        Server Name
+                        <a class="image is-64x64" style="padding: 5px;vertical-align:middle">
+                            <img class=" is-rounded" src="/assets/avatar.png">
+                        </a>
+                    </a>
+                    <a class="navbar-item">
+                        Server Name
+                        <a class="image is-64x64" style="padding: 5px;vertical-align:middle">
+                            <img class=" is-rounded" src="/assets/avatar.png">
+                        </a>
+                    </a>
+                    <a class="navbar-item">
+                        Server Name
+                        <a class="image is-64x64" style="padding: 5px;vertical-align:middle">
+                            <img class=" is-rounded" src="/assets/avatar.png">
+                        </a>
+                    </a>
+
+                </div>
+
+            </div>
+
+            <a class="navbar-item" id="profile">
+                <strong>{{ username }}</strong>
+                <a class="image is-64x64" style="padding: 5px;vertical-align:middle">
+                    <img class=" is-rounded" src="/assets/avatar.png">
                 </a>
-            </div>
+            </a>
         </nav>
-        <div class="modal is-active" id="loading_modal">
-            <div class="modal-background" style="background-color: #10131A;">
-                <img src="/assets/backround.png" alt="">
-            </div>
-            <div class="modal-content has-text-centered">
-                <h1 class="title" style="overflow: hidden;">Loading</h1>
-                <img src="/assets/loading.gif" alt="">
-            </div>
-        </div>
-        <div class="modal" id="profile_modal">
-            <div class="modal-background"></div>
-            <div class="modal-content">
-                <div class="card">
-                    <div class="card-content">
-                        <div class="media">
-                            <div class="content">
-                                <div class="container is-fluid has-text-centered">
-                                    <strong>{{ username }}</strong>
-                                    <a class="image is-128x128" style="padding: 5px;vertical-align:middle">
-                                        <img class=" is-rounded" src="/assets/avatar.png">
-                                    </a>
-                                </div>
-                            </div>
-                            <button id="profile_modal_close" class="modal-close is-large" aria-label="close"></button>
-                        </div>
-                    </div>
+        <div class="columns">
+            <div class="modal is-active" id="loading_modal">
+                <div class="modal-background" style="background-color: #10131A;">
+                    <img src="/assets/backround.png" alt="">
+                </div>
+                <div class="modal-content has-text-centered">
+                    <h1 class="title" style="overflow: hidden;">Loading</h1>
+                    <img src="/assets/loading.gif" alt="">
                 </div>
             </div>
-        </div>
-        <div class="messagediv" id="messages">
-            <div class="chatmessage" v-for="message in messages">
-                <div style="display: none;">{{ message.id }}</div>
-                <article class="media">
-                    <figure class="media-left">
-                        <p class="image is-64x64">
-                            <img class="is-rounded" src="/assets/avatar.png">
-                        </p>
-                    </figure>
-                    <div class="media-content">
-                        <div class="content">
-                            <p>
-                                <strong>{{ message.ausername }}</strong>
+            <div class="column">
+                <nav class="panel" style="padding: 10px; height: 100vh; overflow-x: visible; overflow-y: scroll;">
+                    <a class="panel-block">
+                        channel name
+                    </a>
+                    <a class="panel-block">
+                        channel name
+                    </a>
+                    <a class="panel-block">
+                        channel name
+                    </a>
+                    <a class="panel-block">
+                        channel name
+                    </a>
+                    <a class="panel-block">
+                        channel name
+                    </a>
+                    <a class="panel-block">
+                        channel name
+                    </a>
+                    <a class="panel-block">
+                        channel name
+                    </a>
+                    <a class="panel-block">
+                        channel name
+                    </a>
+                    <a class="panel-block">
+                        channel name
+                    </a>
+                    <a class="panel-block is-active">
+                        channel name
+                    </a>
+                    <a class="panel-block">
+                        channel name
+                    </a>
+                    <a class="panel-block">
+                        channel name
+                    </a>
+                    <a class="panel-block">
+                        channel name
+                    </a>
+                    <a class="panel-block">
+                        channel name
+                    </a>
+                    <a class="panel-block">
+                        channel name
+                    </a>
+                    <a class="panel-block">
+                        channel name
+                    </a>
+                    <a class="panel-block">
+                        channel name
+                    </a>
+                    <a class="panel-block">
+                        channel name
+                    </a>
+                    <a class="panel-block">
+                        channel name
+                    </a>
+                    <a class="panel-block">
+                        channel name
+                    </a>
+                    <a class="panel-block">
+                        channel name
+                    </a>
+                    <a class="panel-block">
+                        channel name
+                    </a>
+                    <a class="panel-block">
+                        channel name
+                    </a>
+                    <a class="panel-block">
+                        channel name
+                    </a>
+                    <a class="panel-block">
+                        channel name
+                    </a>
+                </nav>
+            </div>
+            <div class="column is-four-fifths">
+                <div class="messagediv" id="messages">
+                    <div class="chatmessage" v-for="message in messages">
+                        <div style="display: none;">{{ message.id }}</div>
+                        <article class="media">
+                            <figure class="media-left">
+                                <p class="image is-64x64">
+                                    <img class="is-rounded" src="/assets/avatar.png">
+                                </p>
+                            </figure>
+                            <div class="media-content">
                                 <div class="content">
-                                    <template v-for="line in message.content.split('\n')">{{line}}<br></template>
-                                    <!-- Thanks stackoverflow ^ lol -->
+                                    <p>
+                                        <strong>{{ message.ausername }}</strong>&nbsp;&nbsp;
+                                        <span class="tag">Supporter</span>
+                                        <div class="content">
+                                            <template v-for="line in message.content.split('\n')">{{line}}<br></template>
+                                            <iframe v-if="/(https?:\/\/)?(www\.)?(twitch\.(tv))\/.+[a-z]/gi.test(message.content)" v-bind:src="'https://player.twitch.tv/?channel=' + message.content.split('/').pop()" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe>
+                                        </div>
+                                    </p>
                                 </div>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="media-right">
-                        <div v-if="message.author === id" class="dropdown is-right">
-                            <div class="dropdown-trigger">
-                                <button class="button is-rounded" aria-haspopup="true" aria-controls="dropdown-menu">
-                                    <span class="icon is-small">
-                                        <i class="fas fa-ellipsis-h" aria-hidden="true"></i>
-                                    </span>
-                                </button>
                             </div>
-                            <div class="dropdown-menu" id="dropdown-menu" role="menu">
-                                <div class="dropdown-content">
-                                    <!-- <a class="dropdown-item">
+                            <div class="media-right">
+                                <div v-if="message.author === id" class="dropdown is-right">
+                                    <div class="dropdown-trigger">
+                                        <button class="button is-rounded" aria-haspopup="true" aria-controls="dropdown-menu">
+                                            <span class="icon is-small">
+                                                <i class="fas fa-ellipsis-h" aria-hidden="true"></i>
+                                            </span>
+                                        </button>
+                                    </div>
+                                    <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                                        <div class="dropdown-content">
+                                            <!-- <a class="dropdown-item">
                                     Star
                                 </a> -->
-                                    <a class="dropdown-item" id="editmsg">
-                                        Edit
-                                    </a>
-                                    <hr class="dropdown-divider">
-                                    <a class="deldropdown-item" id="deletemsg">
-                                        Delete
-                                    </a>
+                                            <a class="dropdown-item" id="editmsg">
+                                                Edit
+                                            </a>
+                                            <hr class="dropdown-divider">
+                                            <a class="deldropdown-item" id="deletemsg">
+                                                Delete
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </article>
+                        <hr>
                     </div>
-                </article>
-                <hr>
+                    <section class="section">
+                        <div class="container">
+                            <textarea class="textarea has-fixed-size" id="input_message" name="name" rows="1" cols="80"></textarea>
+                        </div>
+                    </section>
+                </div>
             </div>
         </div>
-        <section class="section">
-            <div class="container">
-                <textarea class="textarea has-fixed-size" id="input_message" name="name" rows="1" cols="80"></textarea>
-            </div>
-        </section>
     </div>
     <script src="/js/chat.js" async></script>
 </body>
