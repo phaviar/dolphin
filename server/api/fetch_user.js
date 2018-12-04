@@ -22,3 +22,17 @@ async function fetchUser (req, res) {
 }
 
 module.exports = post;
+
+const Endpoint = require("../app/endpoint.js");
+
+class FetchUserEndpoint extends Endpoint {
+    constructor(app) {
+        super(app, {
+            path: "/api/fetch_user",
+            params: {
+                token: true,
+                
+            }
+        });
+    }
+}
