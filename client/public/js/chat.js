@@ -6,7 +6,7 @@ var username;
 var cache = [];
 var messages;
 
-var socket = io.connect({
+var socket = io.connect('http://localhost:8083/chat', {
     transportOptions: {
         polling: {
             extraHeaders: {
@@ -30,7 +30,7 @@ async function getUsername (id) {
                 if (parsed.username) {
                     resolve(parsed.username);
                 } else { reject() }
-            }).catch(alert);
+            }).catch(console.log);
     });
 }
 async function fetchMessages () {
@@ -46,7 +46,7 @@ async function fetchMessages () {
                 if (parsed.messages) {
                     resolve(parsed.messages);
                 } else { reject() }
-            }).catch(alert);
+            }).catch(console.log);
     });
 }
 async function mapUsernames (message) {
@@ -81,29 +81,19 @@ function update () {
 }
 socket.on('message_create', async data => {
     if (!cache.includes(data.author)) {
-        if (!cache.includes(data.author)) {
-            let name = await getUsername(data.author);
-            let name = await getUsername(data.author);
-            cache.push({ id: data.author, username: name });
-            cache.push({ id: data.author, username: name });
-        }
+        let name = await getUsername(data.author);
+        cache.push({ id: data.author, username: name });
     }
     app.messages.push({ id: data.id, timestamp: data.timestamp, ausername: cache.find(user => user.id === data.author).username, author: data.author, content: data.content });
-    app.messages.push({ id: data.id, timestamp: data.timestamp, ausername: cache.find(user => user.id === data.author).username, author: data.author, content: data.content });
     setTimeout(() => {
-        setTimeout(() => {
-            messagebody.scrollTop = messagebody.scrollHeight; // Scroll to bottom of messages	             messagebody.scrollTop = messagebody.scrollHeight; // Scroll to bottom of messages
-            update();
-            update();
-        }, 50); // Delay is needed for vue to render	         }, 50); // Delay is needed for vue to render
-    });
+        messagebody.scrollTop = messagebody.scrollHeight; // Scroll to bottom of messages
+        update();
+    }, 50); // Delay is needed for vue to render
 });
 socket.on('message_delete', async data => {
-    socket.on('message_delete', async data => {
-        app.messages.splice(app.messages.indexOf(app.messages.find(message => message.id === data.id)), 1);
-        app.messages.splice(app.messages.indexOf(app.messages.find(message => message.id === data.id)), 1);
-    });
+    app.messages.splice(app.messages.indexOf(app.messages.find(message => message.id === data.id)), 1);
 });
+
 socket.on('disconnect', () => {
     window.location.replace("/login");
 });
@@ -112,7 +102,7 @@ function init () {
     return new Promise((resolve, reject) => {
         getUsername(id).then(usernameReturned => {
             username = usernameReturned;
-        }).catch();
+        }).catch(console.log);
         fetchMessages().then(messagesReturned => {
             messagesReturned.map(mapUsernames); // Cache usernames & use them
             messages = messagesReturned.sort((a, b) => {
@@ -120,7 +110,7 @@ function init () {
             });
 
             resolve(messagesReturned)
-        }).catch();
+        }).catch(console.log);
     })
 }
 (async () => {
@@ -137,7 +127,7 @@ function init () {
     });
 
     // SOCKET IO LISTENERS
-    socket.on('message_create', data => {
+    socket.on('message_create', async data => {
         if (!cache.includes(data.author)) {
             let name = await getUsername(data.author);
             cache.push({ id: data.author, username: name });
