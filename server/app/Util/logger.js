@@ -37,6 +37,7 @@ class Logger {
 
     static fatal(name = "FATAL", message, stacktrace) {
         log(chalk.bgRed.white, name, message, stacktrace);
+        process.exit(0);
     }
 
     static debug(name = "DEBUG", message, stacktrace) {

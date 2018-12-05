@@ -29,6 +29,7 @@ class Database {
 
     async authenticateToken (token) {
         const tokenData = auth.destructToken(token);
+        if (!tokenData) return false;
         const userData = await this.getUser(tokenData.id);
         return !!userData;
     }

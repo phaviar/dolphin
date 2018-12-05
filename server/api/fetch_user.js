@@ -31,8 +31,8 @@ class FetchUserEndpoint extends Endpoint {
             path: "/api/fetch_user",
             params: {
                 token: true,
-                
-            }
+            },
+            auth: true
         });
     }
 }

@@ -13,10 +13,11 @@ app.io = socket(server);
 app.use(express.static("public"));
 app.use(bodyParser.json());
 
-require("./api/api.js")(app);
-require("./app/views.js")(app);
 require("./app/extensions.js")(app);
-require("./events/events.js")(app);
+
+require("./app/router.js")(app);
+require("./app/views.js")(app);
+require("./app/events.js")(app);
 
 // Start the server
 server.listen(port, () =>
